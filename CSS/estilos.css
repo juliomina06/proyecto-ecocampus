@@ -1,0 +1,454 @@
+/* Paleta de colores EcoCampus */
+:root {
+    --verde-principal: #2A9D8F;
+    --verde-oscuro: #264653;
+    --verde-claro: #E9F5F3;
+    --blanco: #FFFFFF;
+    --gris-texto: #666666;
+    --sombra: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Fondo de la página (Degradado ecológico) */
+body {
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Contenedor que simula el celular */
+#app-container {
+    width: 100%;
+    max-width: 400px;
+    height: 700px;
+    background: var(--blanco);
+    border-radius: 30px;
+    box-shadow: var(--sombra);
+    position: relative;
+    overflow: hidden; /* Evita que se desborde el contenido */
+}
+
+/* CONTROL DE PANTALLAS (Soluciona el bug de las dos pantallas) */
+.pantalla {
+    display: none; /* Ocultas por defecto */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    overflow-y: auto;
+    background: var(--blanco);
+}
+
+.pantalla.activa {
+    display: flex; /* Solo se muestra la que tiene la clase activa */
+    flex-direction: column;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* --- ESTILOS DEL LOGIN --- */
+#pantalla-login {
+    justify-content: center;
+}
+
+.tarjeta-login {
+    text-align: center;
+    width: 100%;
+}
+
+.icono-reciclaje {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+/* Animación para el icono de reciclaje */
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tarjeta-login h1 {
+    color: var(--verde-principal);
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+.tarjeta-login p {
+    color: var(--gris-texto);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: var(--verde-claro);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.input-group span {
+    font-size: 1.2rem;
+    color: var(--verde-principal);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+}
+
+button {
+    background-color: var(--verde-principal);
+    color: var(--blanco);
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+}
+
+button:hover {
+    background-color: var(--verde-oscuro);
+    transform: translateY(-2px);
+}
+
+/* --- ESTILOS DEL DASHBOARD --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+header h2 {
+    font-size: 1.1rem;
+    color: var(--verde-oscuro);
+}
+
+.btn-salir, .btn-volver {
+    width: auto;
+    padding: 8px 15px;
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+    box-shadow: none;
+}
+
+.btn-salir:hover, .btn-volver:hover {
+    background: #d1e7e3;
+    transform: none;
+}
+
+.tarjeta-puntos {
+    background: linear-gradient(135deg, var(--verde-principal), #1e7b70);
+    color: var(--blanco);
+    text-align: center;
+    padding: 35px 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(42, 157, 143, 0.3);
+}
+
+.hojas-decorativas {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 5rem;
+    opacity: 0.2;
+    transform: rotate(20deg);
+}
+
+.tarjeta-puntos h1 {
+    font-size: 4.5rem;
+    margin: 10px 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.tarjeta-historial {
+    background: #f8fbfa;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--verde-claro);
+}
+
+.tarjeta-historial h3 {
+    font-size: 1rem;
+    color: var(--verde-oscuro);
+    margin-bottom: 15px;
+}
+
+.tarjeta-historial ul {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.tarjeta-historial li {
+    background: var(--blanco);
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: var(--gris-texto);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- ESTILOS DEL ESCÁNER --- */
+.instruccion {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+    margin-bottom: 15px;
+}
+
+.contenedor-camara {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 20px;
+}
+
+#lector-qr {
+    width: 100%;
+}
+
+/* Marco visual para el escáner */
+.marco-escaner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    border: 3px solid var(--verde-principal);
+    border-radius: 15px;
+    box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.4); /* Oscurece el resto */
+    pointer-events: none; /* Permite hacer clic a través de él */
+}
+
+.resultado {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid var(--verde-principal);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.icono-resultado {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.resultado h3 {
+    color: var(--verde-oscuro);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.resultado p {
+    color: var(--gris-texto);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+/* Botón Secundario */
+.btn-secundario {
+    background-color: var(--blanco);
+    color: var(--verde-principal);
+    border: 2px solid var(--verde-principal);
+    margin-bottom: 20px;
+    box-shadow: none;
+}
+
+.btn-secundario:hover {
+    background-color: var(--verde-claro);
+    color: var(--verde-oscuro);
+}
+
+/* --- Estilos del Modal --- */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-contenido {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-contenido h2 {
+    color: var(--verde-principal);
+    margin-bottom: 5px;
+}
+
+.modal-contenido p {
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+    margin-bottom: 20px;
+}
+
+.opciones-canje {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--verde-claro);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+}
+
+.opcion button {
+    width: auto;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+}
+
+/* --- BLINDAJE DEL VIDEO (Evitar Picture-in-Picture) --- */
+#lector-qr video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Ocultar los controles nativos del navegador en el video */
+#lector-qr video::-webkit-media-controls {
+    display: none !important;
+}
+#lector-qr video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+/* --- Estilos del Toast (Aviso Flotante) --- */
+.toast {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--verde-oscuro);
+    color: var(--blanco);
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2000;
+    text-align: center;
+    width: 85%;
+}
+
+.toast.oculto {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    pointer-events: none;
+}
+/* --- ESTILOS PANEL ADMINISTRATIVO (RF-04) --- */
+.lista-contenedores {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tarjeta-contenedor {
+    background: #f8fbfa;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--verde-claro);
+}
+
+.info-contenedor {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.barra-fondo {
+    width: 100%;
+    height: 15px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.barra-progreso {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.acciones-contenedor {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-simular, .btn-vaciar {
+    width: 50%;
+    padding: 8px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+
+.btn-simular {
+    background-color: #FF6B35; /* Naranja para simular */
+    box-shadow: none;
+}
+
+.btn-vaciar {
+    background-color: var(--gris-texto);
+    box-shadow: none;
+}
