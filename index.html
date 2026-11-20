@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoCampus App - UNIAJC</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <!-- Librería para el escáner de QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -50,6 +50,46 @@
                     <h1 id="puntos-totales">0</h1>
                     <p>Puntos disponibles</p>
                 </div>
+                <!-- Botón del Minijuego Educativo -->
+<button class="btn-secundario" onclick="abrirEcoTrivia()" style="margin-bottom: 15px;">
+    🎮 Eco-Trivia: Aprende y Gana (+15 pts)
+</button>
+
+<!-- Tarjeta de Impacto Ambiental (ODS 12) -->
+<div class="grid-impacto">
+    <div class="caja-impacto">
+        <span>🌍 CO₂ Evitado</span>
+        <strong id="impacto-co2">0 g</strong>
+    </div>
+    <div class="caja-impacto">
+        <span>💧 Agua Ahorrada</span>
+        <strong id="impacto-agua">0 L</strong>
+    </div>
+</div>
+
+<!-- Sección de Retos y Logros -->
+<div class="tarjeta-historial" style="margin-bottom: 20px;">
+    <h3>🏆 Tus Retos Ciudadanos</h3>
+    <div class="grid-retos" id="lista-retos">
+        <div class="reto-item bloqueado" id="reto-primer">
+            <span>🌱</span>
+            <small>Primer Impacto</small>
+        </div>
+        <div class="reto-item bloqueado" id="reto-plastico">
+            <span>♻️</span>
+            <small>3 Plásticos</small>
+        </div>
+        <div class="reto-item bloqueado" id="reto-co2">
+            <span>🌍</span>
+            <small>200g CO₂</small>
+        </div>
+        <div class="reto-item bloqueado" id="reto-comercio">
+            <span>🏪</span>
+            <small>Impulsor Local</small>
+        </div>
+    </div>
+</div>
+
 
                 <!-- Botones de acción -->
                 <button class="btn-principal" onclick="irAEscanner()">
@@ -65,6 +105,10 @@
                 <div class="tarjeta-zona">
                     <h3>📍 ¿Dónde estás reciclando?</h3>
                     <select id="zona-selector">
+                        <div id="estado-punto" style="font-size: 0.8rem; margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: var(--verde-claro); color: var(--verde-oscuro); font-weight: 600;">
+    🟢 Punto Ecológico Disponible (Capacidad óptima)
+</div>
+
                         <option value="Bloque A">Bloque A (Aulas)</option>
                         <option value="Bloque B">Bloque B (Laboratorios)</option>
                         <option value="Biblioteca">Biblioteca Central</option>
@@ -173,6 +217,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="tarjeta-historial" style="margin-top: 15px; margin-bottom: 15px;">
+    <h3>🚛 Despacho a Recicladores (Cali)</h3>
+    <p style="font-size: 0.75rem; color: var(--gris-texto); margin-bottom: 10px;">Asigna recolección cuando un punto supere el 80%.</p>
+    <button onclick="asignarRutaReciclador()" style="background: var(--verde-oscuro); font-size: 0.85rem; padding: 10px;">
+        📢 Notificar a Ruta de Reciclaje
+    </button>
+    <ul id="bitacora-rutas" style="margin-top: 10px; max-height: 110px;">
+        <li style="font-size: 0.75rem;">Sin rutas despachadas hoy.</li>
+    </ul>
+</div>
+
+
                                 <!-- NUEVO: Generador de QRs y Configuración -->
                 <div class="tarjeta-config" style="margin-top: 20px;">
                     <h3>⚙️ Generador de Residuos (Admin)</h3>
@@ -202,8 +259,41 @@
             </main>
         </div>
     </div> <!-- Fin app-container -->
+    <!-- MODAL MINIJUEGO ECO-TRIVIA (Resolución 2184) -->
+<div id="modal-trivia" class="modal oculto">
+    <div class="modal-contenido">
+        <span style="font-size: 0.8rem; color: var(--verde-principal); font-weight: bold;" id="trivia-progreso">Pregunta 1 de 5</span>
+        <h2 style="margin-top: 5px;">¿En qué caneca va?</h2>
+        <div id="trivia-emoji" style="font-size: 3.5rem; margin: 10px 0;">🍕</div>
+        <h3 id="trivia-item" style="color: var(--verde-oscuro); margin-bottom: 5px;">Caja de pizza con grasa</h3>
+        <p id="trivia-pista" style="font-size: 0.8rem; margin-bottom: 15px;">Evita contaminar el material de los recicladores</p>
+        
+        <div class="opciones-canje">
+            <button onclick="responderTrivia('blanca')" style="background: #f8f9fa; color: #264653; border: 2px solid #ccc;">⚪ Caneca Blanca (Aprovechables)</button>
+            <button onclick="responderTrivia('verde')" style="background: #2A9D8F;">🟢 Caneca Verde (Orgánicos)</button>
+            <button onclick="responderTrivia('negra')" style="background: #2b2d42;">⚫ Caneca Negra (No aprovechables)</button>
+        </div>
+        <button class="btn-volver" onclick="cerrarEcoTrivia()" style="margin-top: 15px; width: 100%;">Cerrar Juego</button>
+    </div>
+</div>
 
-    <script src="JS/app.js"></script>
-    <script src="JS/escaner.js"></script>
+<!-- MODAL VOUCHER QR COMERCIO ALIADO -->
+<div id="modal-voucher" class="modal oculto">
+    <div class="modal-contenido" style="border: 2px dashed var(--verde-principal);">
+        <span style="background: var(--verde-claro); color: var(--verde-principal); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">COMERCIO ALIADO VALIDADO</span>
+        <h2 style="margin-top: 10px;">🎟️ Voucher de Canje</h2>
+        <p id="voucher-premio" style="font-weight: bold; color: var(--verde-oscuro); font-size: 1.1rem; margin-bottom: 5px;">Café Americano</p>
+        <small id="voucher-fecha" style="color: var(--gris-texto); display: block; margin-bottom: 15px;">Fecha</small>
+        
+        <div id="voucher-qr" style="display: flex; justify-content: center; margin-bottom: 15px;"></div>
+        
+        <p style="font-size: 0.75rem; color: var(--gris-texto); margin-bottom: 15px;">Presenta este código en la caja del establecimiento aliado para redimir tu beneficio.</p>
+        <button onclick="cerrarVoucher()">Listo / Cerrar</button>
+    </div>
+</div>
+
+
+    <script src="js/app.js"></script>
+    <script src="js/escaner.js"></script>
 </body>
 </html>
