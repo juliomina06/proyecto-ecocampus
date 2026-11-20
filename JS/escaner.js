@@ -137,8 +137,16 @@ function alEscanearExitosamente(textoDecodificado) {
 
 function confirmarDeposito() {
     usuario.codigosUsados.push(codigoEscaneadoActual);
-    localStorage.setItem('usuarioEco', JSON.stringify(usuario));
     agregarEcoPuntos(productoActual, puntosActuales);
+    
+    // 1. Registrar impacto ambiental y evaluar retos
+    registrarImpactoYLogros(tipoMaterial, false);
+
+    // 2. Conectar en tiempo real con el Panel de Logística
+    if (tipoMaterial === "plastico" || tipoMaterial === "papel") {
+        contenedores[tipoMaterial] = Math.min(100, contenedores[tipoMaterial] + 5);
+    }
+
     mostrarToast(`¡Ganaste ${puntosActuales} EcoPuntos!`);
     pasoEscaneo = "producto"; 
     document.querySelector('.instruccion').textContent = "Apunta la cámara al código de barras o QR del producto.";
