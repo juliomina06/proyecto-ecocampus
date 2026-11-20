@@ -452,3 +452,64 @@ header h2 {
     background-color: var(--gris-texto);
     box-shadow: none;
 }
+
+/* --- ESTILOS DE IMPACTO AMBIENTAL Y RETOS --- */
+.grid-impacto {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.caja-impacto {
+    flex: 1;
+    background: var(--verde-claro);
+    padding: 12px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(42, 157, 143, 0.2);
+}
+
+.caja-impacto span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--gris-texto);
+    margin-bottom: 4px;
+}
+
+.caja-impacto strong {
+    font-size: 1.1rem;
+    color: var(--verde-oscuro);
+}
+
+.grid-retos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.reto-item {
+    background: var(--verde-claro);
+    border: 2px solid var(--verde-principal);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.reto-item span {
+    font-size: 1.6rem;
+    display: block;
+}
+
+.reto-item small {
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    font-size: 0.75rem;
+}
+
+.reto-item.bloqueado {
+    background: #f1f1f1;
+    border-color: #dcdcdc;
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
